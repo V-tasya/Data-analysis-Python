@@ -1,0 +1,4 @@
+pandos
+numpy
+matpllotlib
+seaborn
