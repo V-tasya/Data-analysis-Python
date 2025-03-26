@@ -1,4 +1,0 @@
-pandos
-numpy
-matpllotlib
-seaborn
