@@ -5,48 +5,65 @@ def reading_file():
     df = pd.read_csv('adult11.csv')  
     if df.empty:
       print("The file is empty.")
+      return
 
     print("rows, columns:", df.shape) 
   except FileNotFoundError:
     print("The file wasn't found.")
+    return
   except Exception as exeption:
     print(f"Error: {exeption}")
+    return
   
   if df is not None:
     calculate_numerical_features(df)
+    calculate_categorial_features(df)
 
 def calculate_numerical_features(df):
   # numerical data for analysis
-  num_data = ['age', 'fnlwgt', 'education-num', 'capital-gain', 'capital-loss', 'hours-per-week']
+  num_data = df.select_dtypes(include=['number'])
 
-  average_values = df[num_data].mean()
-  median_values = df[num_data].median()
-  min_values = df[num_data].min()
-  max_values = df[num_data].max()
-  standart_deviation = df[num_data].std()
-  quantiles_5 = df[num_data].quantile(0.05)
-  quantiles_95 = df[num_data].quantile(0.95)
-  missing_values = df.isna().sum()
+  if num_data.empty:
+    print("No numerical data found")
+    return
 
   statistics = {
-        'mean': average_values,
-        'median': median_values,
-        'std': standart_deviation,
-        'min': min_values,
-        'max': max_values,
-        '5th_percentile': quantiles_5,
-        '95th_percentile': quantiles_95,
-        'missing_values': missing_values
+        'mean': num_data.mean(),
+        'median': num_data.median(),
+        'std': num_data.std(),
+        'min': num_data.min(),
+        'max': num_data.max(),
+        '5th_percentile': num_data.quantile(0.05),
+        '95th_percentile': num_data.quantile(0.95),
+        'missing_values': num_data.isna().sum()
     }
   
   values = pd.DataFrame(statistics)
-  cleaned_values = values.dropna(axis=1, how='all')
+  values.to_csv('numerical_data.csv', index=True)
 
-  cleaned_values.to_csv('numerical_data.csv', index=True)
   print("Analysed numerical data: ")
-  print(cleaned_values)
+  print(values)
 
 
+def calculate_categorial_features(df):
+  categor_data = df.select_dtypes(include=['object'])
+
+  if categor_data.empty:
+    print("No categorial data found.")
+    return
+
+  statistics = {
+    'unique_klasses': categor_data.nunique(),
+    'missing_values': categor_data.isna().sum()
+  }
+
+  values = pd.DataFrame(statistics)
+  class_proportions_df = values.apply(lambda col: col.value_counts(normalize=True)).T.add_suffix("_proportion")
+  values = values.join(class_proportions_df, how='left')
+  values.to_csv('categorical_data.csv', index=True)
+
+  print("Analyzed categorical data:")
+  print(values)
 
 
 if __name__ == "__main__":

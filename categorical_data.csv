@@ -1,0 +1,10 @@
+,unique_klasses,missing_values,0_proportion,2_proportion,5_proportion,6_proportion,7_proportion,9_proportion,15_proportion,16_proportion,42_proportion
+workclass,9,0,,,,,,,,,
+education,16,0,,,,,,,,,
+marital-status,7,0,,,,,,,,,
+occupation,15,0,,,,,,,,,
+relationship,6,0,,,,,,,,,
+race,5,0,,,,,,,,,
+gender,2,0,,,,,,,,,
+native-country,42,0,,,,,,,,,
+salary,2,0,,,,,,,,,
