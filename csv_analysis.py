@@ -1,26 +1,6 @@
 import pandas as pd
 
-def reading_file():
-  try:
-    df = pd.read_csv('adult11.csv')  
-    if df.empty:
-      print("The file is empty.")
-      return
-
-    print("rows, columns:", df.shape) 
-  except FileNotFoundError:
-    print("The file wasn't found.")
-    return
-  except Exception as exeption:
-    print(f"Error: {exeption}")
-    return
-  
-  if df is not None:
-    calculate_numerical_features(df)
-    calculate_categorial_features(df)
-
 def calculate_numerical_features(df):
-  # numerical data for analysis
   num_data = df.select_dtypes(include=['number'])
 
   if num_data.empty:
@@ -64,7 +44,3 @@ def calculate_categorial_features(df):
 
   print("Analyzed categorical data:")
   print(values)
-
-
-if __name__ == "__main__":
-  reading_file()
