@@ -25,4 +25,4 @@ def histograms_visualization():
   plt.show()
 
 if __name__ == "__main__":
-    histograms_visualization()
+  histograms_visualization()
