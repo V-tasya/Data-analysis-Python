@@ -16,7 +16,7 @@ def boxplots_visualisation():
   plt.title("Distribution of salary by hours per week")
   plt.xlabel("Work class")
   plt.ylabel("Salary")
-  plt.savefig("salary_by_hours_per_week.png", dpi=300)
+  plt.savefig("salary_by_working_class.png", dpi=300)
   plt.show()
 
   plt.figure(figsize=(8, 6))
@@ -32,7 +32,7 @@ def boxplots_visualisation():
   plt.title("Distribution of salary by race")
   plt.xlabel("Relationship")
   plt.ylabel("Salary")
-  plt.savefig("salary_by_occupation.png", dpi=300)
+  plt.savefig("salary_by_relationship.png", dpi=300)
   plt.show()
 
 if __name__ == "__main__":
