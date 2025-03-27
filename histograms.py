@@ -6,7 +6,7 @@ def histograms_visualization(df):
 
   sns.set_style("whitegrid")
 
-  plt.figure(figsize=(16, 12))
+  plt.figure(figsize=(16, 15))
   plt.title("Destibution of education")
   sns.displot(df, x="education", bins=20)
   plt.xticks(rotation=45, ha="right")
